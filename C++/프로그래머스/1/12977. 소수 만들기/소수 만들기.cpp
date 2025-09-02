@@ -15,20 +15,20 @@ int solution(vector<int> nums)
             {
                 int num = nums[i] + nums[j] + nums[k];
                 int test = sqrt(num);
-                bool isBool = false;
+                bool isDecimal = false;
                 for (int u = 2; u <= test; u++)
                 {
                     if (num % u == 0)
                     {
-                        isBool = false;
+                        isDecimal = false;
                         break;
                     }
                     else
                     {
-                        isBool = true;
+                        isDecimal = true;
                     }
                 }
-                if (isBool)
+                if (isDecimal)
                 {
                     answer++;
                 }
