@@ -14,9 +14,9 @@ int solution(vector<int> nums)
             for (int k = j + 1; k < nums.size(); k++)
             {
                 int num = nums[i] + nums[j] + nums[k];
-                int test = sqrt(num);
+                int numRoot = sqrt(num);
                 bool isDecimal = false;
-                for (int u = 2; u <= test; u++)
+                for (int u = 2; u <= numRoot; u++)
                 {
                     if (num % u == 0)
                     {
