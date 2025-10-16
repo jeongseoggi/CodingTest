@@ -6,6 +6,17 @@
 
 using namespace std;
 
+int TimeCalculate(string timeStr)
+{
+    string hourStr, minStr;
+    stringstream ss(timeStr);
+    getline(ss, hourStr, ':');
+    ss >> minStr;
+
+    return (stoi(hourStr) * 60) + stoi(minStr);
+}
+
+
 vector<int> solution(vector<int> fees, vector<string> records) 
 {
     vector<int> answer;
@@ -45,52 +56,19 @@ vector<int> solution(vector<int> fees, vector<string> records)
 
             for (int i = 0; i < v.size(); ++i)
             {
-                int carIntime;
-                int carOuttime;
-
                 if (i >= out.size())
-                {
-                    string carInhourStr, carInMinStr;
-                    stringstream ss(v[i]);
-                    getline(ss, carInhourStr, ':');
-                    ss >> carInMinStr;
-
-                    carIntime = (stoi(carInhourStr) * 60) + stoi(carInMinStr);
-                    finalTime += maxTime - carIntime;
+                {      
+                    finalTime += maxTime - TimeCalculate(v[i]);
                 }
                 else
                 {
-                    string carInhourStr, carInMinStr;
-                    stringstream ss(v[i]);
-                    getline(ss, carInhourStr, ':');
-                    ss >> carInMinStr;
-
-                    carIntime = (stoi(carInhourStr) * 60) + stoi(carInMinStr);
-
-                    string carOuthourStr, carOutMinStr;
-                    stringstream s2(out[i]);
-                    getline(s2, carOuthourStr, ':');
-                    s2 >> carOutMinStr;
-
-                    carOuttime = (stoi(carOuthourStr) * 60) + stoi(carOutMinStr);
-
-                    finalTime += carOuttime - carIntime;
-
+                    finalTime += TimeCalculate(out[i]) - TimeCalculate(v[i]);
                 }
-               
             }
         }
         else
         {
-            int carIntime;
-
-
-            string carInhourStr, carInMinStr;
-            stringstream ss(v[0]);
-            getline(ss, carInhourStr, ':');
-            ss >> carInMinStr;
-            carIntime = (stoi(carInhourStr) * 60) + stoi(carInMinStr);
-            finalTime = maxTime - carIntime;
+            finalTime = maxTime - TimeCalculate(v[0]);
         }
         
         if (finalTime <= fees[0])
@@ -99,14 +77,8 @@ vector<int> solution(vector<int> fees, vector<string> records)
         }
         else
         {
-
-
-            int test = ceil((finalTime - fees[0]) / static_cast<double>(fees[2]));
-
             price += fees[1] + ceil((finalTime - fees[0]) / static_cast<double>(fees[2])) * fees[3];
         }
-
-
         answer.push_back(price);
     }
 
