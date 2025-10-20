@@ -3,43 +3,31 @@
 
 using namespace std;
 
-string solution(string s) 
+string solution(string s)
 {
     string answer = "";
-
     bool isFirst = true;
 
-    for (int i = 0; i < s.size(); i++)
+    for (int i = 0; i <= s.size(); ++i)
     {
-        if (i == 0 || isFirst)
+        if (isFirst && isalpha(s[i]))
         {
-            if (s[i] >= 'A')
-            {
-                s[i] = toupper(s[i]);
-                isFirst = false;
-                continue;
-            }
-            else if (s[i] == ' ')
-            {
-                continue;
-            }
-            else
-            {
-                isFirst = false;
-                continue;
-            }
+            s[i] = toupper(s[i]);
+            isFirst = false;
         }
-        
-        if (s[i] == ' ')
-        {
-            isFirst = true;
-        }
-
-        if (!isFirst)
+        else if (!isFirst)
         {
             s[i] = tolower(s[i]);
         }
-        
+        else
+        {
+            isFirst = false;
+        }
+
+        if (isspace(s[i]))
+        {
+            isFirst = true;
+        }
     }
 
     answer = s;
@@ -47,3 +35,4 @@ string solution(string s)
 
     return answer;
 }
+
