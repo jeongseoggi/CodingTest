@@ -5,63 +5,28 @@
 
 using namespace std;
 
-int solution(int x, int y, int n)
-{
-    int answer = 0;
-    queue<int> q;
-    set<int> s;
-    bool isStop = false;
+int solution(int x, int y, int n) {
+    vector<int> dp(y + 1, -1);
+    dp[x] = 0; // 시작점은 0회
 
-    q.push(x);
+    for (int i = x; i <= y; i++) {
+        if (dp[i] == -1) continue; // 아직 도달 불가능한 값은 패스
 
-    while (!q.empty())
-    {
-        queue<int> v;
-
-        while (!q.empty())
-        {
-            int value = q.front();
-            q.pop();
-
-            if (value == y)
-            {
-                isStop = true;
-                break;
-            }
-
-            if (s.find(value * 2) == s.end() && value * 2 <= y)
-            {
-                s.insert(value * 2);
-                v.push(value * 2);
-            }
-
-            if (s.find(value * 3) == s.end() && value * 3 <= y)
-            {
-                s.insert(value * 3);
-                v.push(value * 3);
-            }
-
-            if (s.find(value + n) == s.end() && value + n <= y)
-            {
-                s.insert(value + n);
-                v.push(value + n);
-            }
+        if (i + n <= y) {
+            if (dp[i + n] == -1) dp[i + n] = dp[i] + 1;
+            else dp[i + n] = min(dp[i + n], dp[i] + 1);
         }
-   
-        if (isStop)
-        {
-            break;
+
+        if (i * 2 <= y) {
+            if (dp[i * 2] == -1) dp[i * 2] = dp[i] + 1;
+            else dp[i * 2] = min(dp[i * 2], dp[i] + 1);
         }
-        q = v;
-        answer++;
+
+        if (i * 3 <= y) {
+            if (dp[i * 3] == -1) dp[i * 3] = dp[i] + 1;
+            else dp[i * 3] = min(dp[i * 3], dp[i] + 1);
+        }
     }
 
-    if (isStop)
-    {
-        return answer;
-    }
-    else
-    {
-        return -1;
-    }
+    return dp[y];
 }
