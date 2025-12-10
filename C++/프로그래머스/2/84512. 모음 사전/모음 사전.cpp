@@ -2,52 +2,22 @@
 
 using namespace std;
 
-map<char, char> maps;
-const int WORD_INDEX = 4;
-
-int dfs(int index, string curWord, string targetWord)
+int solution(string word)
 {
-    if (curWord == targetWord)
-    {
-        return index;
-    }
+	int answer = 0;
+	vector<int> v = { 781, 156, 31, 6, 1 };
+	map<char, int> wordMaps;
 
-    if (curWord.length() < 5)
-    {
-        curWord += "A";
-    }
-    else
-    {
-        int i = WORD_INDEX;
-        while (true)
-        {
-            if (curWord[i] == 'U')
-            {
-                curWord = curWord.substr(0, i);
-                i--;
-                continue;
-            }
-            else
-            {
-                curWord[i] = maps[curWord[i]];  
-                break;
-            }
+	wordMaps['A'] = 0;
+	wordMaps['E'] = 1;
+	wordMaps['I'] = 2;
+	wordMaps['O'] = 3;
+	wordMaps['U'] = 4;
 
-        }
-    }
+	for (int i = 0; i < word.size(); ++i)
+	{
+		answer += (wordMaps[word[i]] * v[i]) + 1;
+	}
 
-    return dfs(index + 1, curWord, targetWord);
-}
-
-int solution(string word) 
-{
-    int answer = 0;
-
-    maps['A'] = 'E';
-    maps['E'] = 'I';
-    maps['I'] = 'O';
-    maps['O'] = 'U';
-
-
-    return dfs(answer + 1, "A", word);
+	return answer;
 }
