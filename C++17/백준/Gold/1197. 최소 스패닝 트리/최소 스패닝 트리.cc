@@ -25,11 +25,13 @@ void unite(int a, int b, vector<int>& parent)
 {
     a = find(a, parent);
     b = find(b, parent);
+
     if(a != b)
     {
-         parent[b] = a;
+        parent[b] = a;
     }
 }
+
 
 int main()
 {
@@ -57,6 +59,7 @@ int main()
         parent[i] = i;
     }
 
+
     int total_cost = 0;
     int count = 0;
 
@@ -66,17 +69,19 @@ int main()
         {
             continue;
         }
+
         unite(e.from, e.to, parent);
+
         total_cost += e.cost;
         count++;
 
-        if(count == V - 1) 
+        if(count == V - 1)
         {
             break;
         }
     }
 
-    cout << total_cost << endl;
+    cout << total_cost << "\n";
 
 
     return 0;
