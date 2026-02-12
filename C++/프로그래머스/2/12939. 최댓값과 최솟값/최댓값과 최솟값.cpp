@@ -1,56 +1,40 @@
-#include <string>
-#include <vector>
-#include <limits>
+#include <bits/stdc++.h>
 using namespace std;
 
 
-string solution(string s) 
+string solution(string s)
 {
     string answer = "";
 
-    long long min = numeric_limits<long long>::max();
-    long long max = numeric_limits<long long>::min();
+    long long maxValue = numeric_limits<long long>::min();
+    long long minValue = numeric_limits<long long>::max();
 
-    while (true)
+
+    
+    string temp;
+
+    for (int i = 0; i < s.size(); ++i)
     {
-        size_t pos = s.find(" ");
-
-        if (pos == string::npos)
+        if (s[i] == ' ')
         {
-            long long value = stoll(s);
-
-            if (value < min)
-            {
-                min = value;
-            }
-
-            if (value > max)
-            {
-                max = value;
-            }
-            break;
+            long long value = stoll(temp);
+            maxValue = max(value, maxValue);
+            minValue = min(value, minValue);
+            temp = "";
+            continue;
         }
-
-        string ss = s.substr(0, pos);
-        s.erase(0, pos + 1);
-
-        long long value = stoll(ss);
-
-        if (value < min)
-        {
-            min = value;
-        }
-
-        if (value > max)
-        {
-            max = value;
-        }
+        temp += s[i];
     }
-        
-    answer += to_string(min);
-    answer += " ";
-    answer += to_string(max);
 
+
+    long long value = stoll(temp);
+    maxValue = max(value, maxValue);
+    minValue = min(value, minValue);
+
+
+    answer += to_string(minValue);
+    answer += " ";
+    answer += to_string(maxValue);
 
     return answer;
 }
