@@ -11,36 +11,32 @@ bool solution(string s)
         return false;
     }
 
-    queue<char> q;
-    q.push(s[0]);
+    stack<char> st;
+
+    st.push(s[0]);
 
     for (int i = 1; i < s.size(); ++i)
     {
-        if (q.empty())
+        if (s[i] == '(')
         {
-            q.push(s[i]);
+            st.push(s[i]);
             continue;
         }
-
-        string temp = "";
-        temp += q.front();
-        temp += s[i];
-
-        if (temp == "()")
+        else if (s[i] == ')' && st.size() != 0)
         {
-            q.pop();
+            st.pop();
         }
-        else
+        else if (st.size() == 0 && s[i] == ')')
         {
-            q.push(s[i]);
+            return false;
         }
     }
 
-    if (!q.empty())
+    if (st.size() != 0)
     {
-        answer = false;
+        return false;
     }
 
 
-    return answer;
+    return true;
 }
