@@ -1,52 +1,55 @@
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-int zeroValue = 0;
-
-int test(string ss, int changeValue)
+vector<int> solution(string s)
 {
-    int oneValue = 0;
-    vector<int> v;
-    string newStr;
-    if (ss.size() <= 1)
-    {
-        return changeValue;
-    }
-
-
-    for (int i = 0; i < ss.size(); i++)
-    {
-        if (ss[i] == '0')
-        {
-            zeroValue++;
-            continue;
-        }
-        oneValue++;
-    }
-
-    while (oneValue > 0)
-    {
-        v.push_back(oneValue % 2);
-        oneValue /= 2;
-    }
-
-    for (auto it = v.rbegin(); it != v.rend(); it++)
-    {
-        newStr += to_string(*it);
-    }
-
-    return test(newStr, changeValue + 1);
-}
-
-
-
-vector<int> solution(string s) {
     vector<int> answer;
+    
+    int count = 1;
+    int zeroRemove = 0;
 
-    answer.push_back(test(s, 0));
-    answer.push_back(zeroValue);
+
+    while (s.size() != 1)
+    {
+        string temp;
+        int oneValue;
+
+        for (int i = 0; i < s.size(); ++i)
+        {
+            if (s[i] == '1')
+            {
+                temp += s[i];
+            }
+            else
+            {
+                zeroRemove++;
+            }
+        }
+
+        oneValue = temp.size();
+        temp.clear();
+
+        while (oneValue != 0)
+        {
+            int div = oneValue % 2;
+            temp += to_string(div);
+            oneValue /= 2;
+        }
+        
+        if (temp.size() == 1)
+        {
+            break;
+        }
+
+        s = temp;
+
+        count++;
+    }
+
+
+    answer.push_back(count);
+    answer.push_back(zeroRemove);
 
     return answer;
 }
