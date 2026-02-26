@@ -5,23 +5,24 @@ using namespace std;
 int solution(int n) 
 {
     int answer = 0;
-    int nextValue = n + 1;
-    bitset<10> bits(n);
+    int next = n + 1;
 
-    int count = bits.count();
+
+    bitset<10> nBit(n);
 
     while (true)
     {
-        bitset<10> bits2(nextValue);
+        bitset<10> nextBit(next);
 
-        if (count == bits2.count())
+        if (nextBit.count() == nBit.count())
         {
             break;
         }
 
-        nextValue++;
+        next++;
     }
 
-    answer = nextValue;
+    answer = next;
+
     return answer;
 }
