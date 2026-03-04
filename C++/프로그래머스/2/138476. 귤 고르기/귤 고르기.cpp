@@ -1,37 +1,31 @@
-#include <string>
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
+#include <bits/stdc++.h>
+
 using namespace std;
 
-bool Compare(pair<int, int> a, pair<int, int> b)
+bool Compare(pair<int, int>& a, pair<int, int>& b)
 {
     return a.second > b.second;
 }
 
-
-int solution(int k, vector<int> tangerine)
+int solution(int k, vector<int> tangerine) 
 {
     int answer = 0;
     int count = k;
-    unordered_map<int, int> maps;
+    map<int, int> maps;
 
-    for (int i = 0; i < tangerine.size(); i++)
+
+    for (int& a : tangerine)
     {
-        maps[tangerine[i]] += 1;
+        maps[a] += 1;
     }
 
-    vector<pair<int, int>> v(maps.begin(), maps.end());
-    sort(v.begin(), v.end(), Compare);
+    vector<pair<int, int>> pairs(maps.begin(), maps.end());
+    sort(pairs.begin(), pairs.end(), Compare);
 
-    for (const pair<int, int>& pa : v)
+    for (const pair<int, int> p : pairs)
     {
-        if(count <= 0)
-        {
-            break;
-        }
-        
-        count -= pa.second;
+        if (count <= 0) break;
+        count -= p.second;
         answer++;
     }
 
