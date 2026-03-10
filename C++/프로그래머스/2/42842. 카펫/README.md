@@ -1,10 +1,10 @@
 # [level 2] 카펫 - 42842 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42842#qna) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42842) 
 
 ### 성능 요약
 
-메모리: 4.16 MB, 시간: 0.02 ms
+메모리: 4.19 MB, 시간: 0.02 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 09월 22일 10:20:15
+2026년 03월 10일 09:30:14
 
 ### 문제 설명
 

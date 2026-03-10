@@ -3,7 +3,8 @@
 
 using namespace std;
 
-vector<int> solution(int brown, int yellow) {
+vector<int> solution(int brown, int yellow) 
+{
     vector<int> answer;
 
     int value = brown + yellow;
@@ -14,7 +15,7 @@ vector<int> solution(int brown, int yellow) {
         {
             int num = value / i;
 
-            if ((i - 2) * (num - 2) == yellow) // 테두리 제외 계산 i - 2, num - 2 == yellow
+            if ((i - 2) * (num - 2) == yellow)
             {
                 answer.push_back(num);
                 answer.push_back(i);
@@ -22,5 +23,6 @@ vector<int> solution(int brown, int yellow) {
             }
         }
     }
+
     return answer;
 }
